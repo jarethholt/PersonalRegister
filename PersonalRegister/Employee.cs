@@ -54,7 +54,7 @@ namespace PersonalRegister
             Salary = salary;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return $"{Name}, {Salary:C} {_SalarySuffix}";
         }
