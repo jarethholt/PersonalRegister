@@ -23,7 +23,9 @@ namespace PersonalRegister
          */
 
         private const string _SalarySuffix = "SEK/månad";
-        private string _Name;
+        private static int _NextID = 1;
+        private readonly int ID;
+        private string _Name = "";
         private decimal _Salary;
 
         public string Name
@@ -50,13 +52,15 @@ namespace PersonalRegister
 
         public Employee(string name, decimal salary)
         {
+            ID = _NextID;
+            _NextID++;
             Name = name;
             Salary = salary;
         }
 
         public override string ToString()
         {
-            return $"{Name}, {Salary:C} {_SalarySuffix}";
+            return $"{ID}, {Name}, {Salary:C} {_SalarySuffix}";
         }
     }
 }
