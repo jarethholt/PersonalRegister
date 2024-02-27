@@ -46,7 +46,7 @@ namespace PersonalRegister
         private int MaxSalaryLength()
         {
             // Determine the maximum length needed to display a salary
-            return _Employees.Max(employee => "{employee.Salary:C}".Length);
+            return _Employees.Max(employee => $"{employee.Salary:C}".Length);
         }
 
         public override string ToString()
@@ -56,14 +56,14 @@ namespace PersonalRegister
             StringBuilder builder = new();
             int nameLength = MaxNameLength();
             int salaryLength = MaxSalaryLength();
-            string formatString = string.Format("{0}0:{2}{1}    {0}1:{3}{1}\n", "{", "}", nameLength, salaryLength);
+            string formatString = string.Format("{0}0,-{2}{1}    {0}1,{3}{1}", "{", "}", nameLength, salaryLength);
             string header = string.Format(formatString, "Name", "Salary");
-            builder.Append(header);
+            builder.AppendLine(header);
             builder.AppendLine(new string('-', header.Length));
-            formatString = string.Format("{0}0:{2}{1}    {0}1:{3}C{1}\n", "{", "}", nameLength, salaryLength);
+            formatString = string.Format("{0}0,-{2}{1}    {0}1,{3}:C{1}", "{", "}", nameLength, salaryLength);
             foreach(Employee employee in _Employees)
             {
-                builder.Append(string.Format(formatString, employee.Name, employee.Salary));
+                builder.AppendLine(string.Format(formatString, employee.Name, employee.Salary));
             }
             return builder.ToString();
         }
