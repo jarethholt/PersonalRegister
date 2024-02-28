@@ -30,13 +30,15 @@ namespace PersonalRegister
         private int MaxNameLength()
         {
             // Determine the maximum length needed to display a name
-            return _Employees.Max(employee => employee.Name.Length);
+            if (_Employees.Count == 0) return 0;
+            else return _Employees.Max(employee => employee.Name.Length);
         }
 
         private int MaxSalaryLength()
         {
             // Determine the maximum length needed to display a salary
-            return _Employees.Max(employee => $"{employee.Salary:C}".Length);
+            if (_Employees.Count == 0) return 0;
+            else return _Employees.Max(employee => $"{employee.Salary:C}".Length);
         }
 
         public void DisplayRegistry()
