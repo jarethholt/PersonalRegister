@@ -10,7 +10,7 @@
             registry.AddEmployee("Gunilla Svensson", 70000.00m);
             registry.AddEmployee("Sergej Malyshev", 60000.00m);
             registry.AddEmployee("Ana Ng", 55000.00m);
-            Console.WriteLine(registry.ToString());
+            registry.DisplayRegistry();
             Console.ReadLine();
         }
 

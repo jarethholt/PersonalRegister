@@ -27,16 +27,6 @@ namespace PersonalRegister
             _Employees.Add(new Employee(name, salary));
         }
 
-        public void AddEmployee(Employee employee)
-        {
-            _Employees.Add(employee);
-        }
-
-        public Employee RemoveEmployee(string name)
-        {
-            throw new NotImplementedException("Removing employees has not been implemented yet");
-        }
-
         private int MaxNameLength()
         {
             // Determine the maximum length needed to display a name
@@ -49,23 +39,30 @@ namespace PersonalRegister
             return _Employees.Max(employee => $"{employee.Salary:C}".Length);
         }
 
-        public override string ToString()
+        public void DisplayRegistry()
         {
-            // Want to format result to view all names and salaries easily
-            // Can be made simpler using a string builder
-            StringBuilder builder = new();
+            // Display the registry in a well-formatted way.
             int nameLength = MaxNameLength();
             int salaryLength = MaxSalaryLength();
-            string formatString = string.Format("{0}0,-{2}{1}    {0}1,{3}{1}", "{", "}", nameLength, salaryLength);
-            string header = string.Format(formatString, "Name", "Salary");
-            builder.AppendLine(header);
-            builder.AppendLine(new string('-', header.Length));
-            formatString = string.Format("{0}0,-{2}{1}    {0}1,{3}:C{1}", "{", "}", nameLength, salaryLength);
-            foreach(Employee employee in _Employees)
+            salaryLength = Math.Min(salaryLength, "Salary".Length);
+
+            // Use nameLength and salaryLength to determine alignment
+            // Complicated format string here to be able to embed braces
+            string format = string.Format(
+                "{0}0,-{2}{1}    {0}1,{3}{1}",
+                "{", "}", nameLength, salaryLength);
+            string header = string.Format(format, "Name", "Salary");
+            Console.WriteLine(header);
+            Console.WriteLine(new string('-', header.Length));
+
+            format = string.Format(
+                "{0}0,-{2}{1}    {0}1,{3}:C{1}",
+                "{", "}", nameLength, salaryLength);
+            foreach (Employee employee in _Employees)
             {
-                builder.AppendLine(string.Format(formatString, employee.Name, employee.Salary));
+                Console.WriteLine(string.Format(format, employee.Name, employee.Salary));
             }
-            return builder.ToString();
+            return;
         }
     }
 }

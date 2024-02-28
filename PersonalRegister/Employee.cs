@@ -22,9 +22,6 @@ namespace PersonalRegister
          * The string representation is defined by ToString (inherited from Object).
          */
 
-        private const string _SalarySuffix = "SEK/månad";
-        private static int _NextID = 1;
-        private readonly int ID;
         private string _Name = "";
         private decimal _Salary;
 
@@ -52,15 +49,13 @@ namespace PersonalRegister
 
         public Employee(string name, decimal salary)
         {
-            ID = _NextID;
-            _NextID++;
             Name = name;
             Salary = salary;
         }
 
         public override string ToString()
         {
-            return $"{ID}, {Name}, {Salary:C} {_SalarySuffix}";
+            return $"{Name}, {Salary:C}";
         }
     }
 }
